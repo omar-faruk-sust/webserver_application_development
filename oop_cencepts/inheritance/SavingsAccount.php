@@ -3,6 +3,7 @@
 require 'BankAccount.php';
 
 class SavingsAccount extends BankAccount {
+    
     private float $interestRate;
     
     /*public function __construct(float $rate)
@@ -15,6 +16,8 @@ class SavingsAccount extends BankAccount {
         parent::__construct($acNumber, $amount); // Call parent class constructor
         
         $this->interestRate = $rate;
+
+        $this->log("The interest rate for saving account is: ". $rate);
     }
 
     /*public function setInterestRate(float $interestRate): void

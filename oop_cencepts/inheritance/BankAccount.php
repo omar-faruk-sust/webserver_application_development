@@ -1,6 +1,11 @@
 <?php
 
+require_once("Logger.php");
+
 class BankAccount {
+    // This is how you include a trait
+    use Logger;
+
     private string $accountNumber;
     private float $balance;
 
@@ -8,6 +13,8 @@ class BankAccount {
     {
         $this->accountNumber = $acNumber;
         $this->balance = $amount;
+
+        $this->log("A new bank account is created and it's number is: ". $acNumber);
     }
 
     public function getBalance() {
@@ -34,5 +41,10 @@ class BankAccount {
 
     public function getAccountNumber(): string {
         return $this->accountNumber;
+    }
+
+    public final function getMyBalance()
+    {
+        return $this->getBalance();
     }
 }

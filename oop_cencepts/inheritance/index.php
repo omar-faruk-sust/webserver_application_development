@@ -1,6 +1,6 @@
 <?php
 require "SavingsAccount.php";
-
+require "CheckingAccount.php";
 
 /** When you don't have any constructor in child class */
 /*$savingsAccount = new SavingsAccount("3883833", 7989);
@@ -17,3 +17,9 @@ $savingsAccount = new SavingsAccount("3883833", 7989, 0.2);
 echo "My opening balance is: ". $savingsAccount->getBalance() . "<br>";
 $savingsAccount->addInterest();
 echo "After applying the interest the new balance is: ". $savingsAccount->getBalance() . "<br>";
+
+
+$checkingAccount = new CheckingAccount('11111', 1200, 100);
+echo "My opening balance is: ". $checkingAccount->getBalance() . "<br>";
+$checkingAccount->withdraw(500);
+echo "New banalnce after widrawal is: ". $checkingAccount->getBalance();
