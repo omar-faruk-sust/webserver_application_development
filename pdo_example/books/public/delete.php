@@ -1,14 +1,21 @@
 <?php
-require_once '../../config/db_config.php';
-require_once '../../config/DBConnection.php';
+
 require_once '../models/Book.php';
 
-$pdo = DBConnection::connect($host, $user, $dbName, $password);
-$book = new Book($pdo);
+$book = new Book();
 
-$id = $_GET['id'] ?? null;
-if ($id) {
-    $book->delete($id);
+if (isset($_GET['id'])) {
+    $book_id = $_GET['id'];
+
+    if ($book->deleteBook($book_id)) {
+        echo "Book deleted successfully!";
+        header("Location: index.php");
+        exit;
+    } else {
+        echo "Error deleting book.";
+    }
+} else {
+    echo "Invalid request.";
 }
-header("Location: index.php");
-exit;
+
+?>
