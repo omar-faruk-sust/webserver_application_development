@@ -14,7 +14,7 @@ class Book {
         return $stm->fetchAll();
     }
 
-    public function getOneByName(int $id): ?array
+    public function getOneById(int $id): ?array
     {
         $stm = $this->pdo->prepare("select * from books where book_id = :id");
         $stm->bindValue(":id", $id, PDO::PARAM_INT);
@@ -23,5 +23,25 @@ class Book {
         return $stm->fetch(PDO::FETCH_ASSOC);
     }
     
+    public function create($name, $isbn) {
+        $stmt = $this->pdo->prepare("INSERT INTO books (name, isbn) VALUES (:name, :isbn)");
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':isbn', $isbn);
+        return $stmt->execute();
+    }
+
+    public function update($id, $name, $isbn) {
+        $stmt = $this->pdo->prepare("UPDATE books SET name = :name, isbn = :isbn WHERE book_id = :id");
+        $stmt->bindValue(':name', $name);
+        $stmt->bindValue(':isbn', $isbn);
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
+
+    public function delete($id) {
+        $stmt = $this->pdo->prepare("DELETE FROM books WHERE book_id = :id");
+        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+        return $stmt->execute();
+    }
 }
 ?>
