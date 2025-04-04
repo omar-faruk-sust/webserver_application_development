@@ -4,6 +4,7 @@ require_once '../../config/db_config.php';
 require_once '../../config/DBConnection.php';
 require_once '../models/Book.php';
 
+
 $book = new Book(
     DBConnection::connect($host, $user, $dbName, $password)
 );
@@ -35,8 +36,8 @@ $books = $book->getAll();
                 <td><?= $mBook['name']; ?></td>
                 <td><?= $mBook['isbn']; ?></td>
                 <td>
-                    <a href="edit.php?id=<?= $mBook['book_id'] ?>" class="btn btn-primary btn-sm">Edit</a>
-                    <a href="delete.php?id=<?= $mBook['book_id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                    <a href="" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                 </td>
             </tr>
             <?php endforeach; ?>
