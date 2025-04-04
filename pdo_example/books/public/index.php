@@ -3,6 +3,7 @@
 require_once '../../config/db_config.php';
 require_once '../../config/DBConnection.php';
 require_once '../models/Book.php';
+require_once '../../config/session_check.php';
 
 $book = new Book(
     DBConnection::connect($host, $user, $dbName, $password)

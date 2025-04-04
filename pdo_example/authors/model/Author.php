@@ -8,7 +8,7 @@ class Author {
     }
 
     public function getAll() {
-        $stmt = $this->pdo->query("SELECT * FROM authors ORDER BY author_id DESC");
+        $stmt = $this->pdo->query("SELECT * FROM authors ORDER BY author_id ASC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
