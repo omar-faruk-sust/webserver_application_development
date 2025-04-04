@@ -1,28 +1,15 @@
 <?php
+
 require_once '../../config/db_config.php';
 require_once '../../config/DBConnection.php';
 require_once '../models/Book.php';
 
-$pdo = DBConnection::connect($host, $user, $dbName, $password);
-$book = new Book($pdo);
 
-$id = $_GET['id'] ?? null;
-if (!$id) {
-    header("Location: index.php");
-    exit;
-}
+$book = new Book(
+    DBConnection::connect($host, $user, $dbName, $password)
+);
+$books = $book->getAll();
 
-$bookData = $book->getOneById($id);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'] ?? '';
-    $isbn = $_POST['isbn'] ?? '';
-    if ($name && $isbn) {
-        $book->update($id, $name, $isbn);
-        header("Location: index.php");
-        exit;
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -35,12 +22,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body class="bg-light">
 <div class="container mt-5">
     <h2 class="mb-4">Books</h2>
-    <a href="index.php" class="btn btn-primary mb-3">Book List</a>
-<form method="POST">
-    <label>Book Name: <input type="text" name="name" value="<?= htmlspecialchars($bookData['name']) ?>" required></label><br>
-    <label>ISBN: <input type="text" name="isbn" value="<?= htmlspecialchars($bookData['isbn']) ?>" required></label><br>
-    <button class="btn btn-success mb-3" type="submit">Update Book</button>
-</form>
+    <a href="create.php" class="btn btn-success mb-3">Add New Book</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th><th>Name</th><th>ISBN</th><th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($books as $mBook): ?>
+            <tr>
+                <td><?= $mBook['book_id']; ?></td>
+                <td><?= $mBook['name']; ?></td>
+                <td><?= $mBook['isbn']; ?></td>
+                <td>
+                    <a href="" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>
