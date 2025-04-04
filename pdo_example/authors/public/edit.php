@@ -2,6 +2,7 @@
 require_once '../../config/db_config.php';
 require_once '../../config/DBConnection.php';
 require_once '../model/Author.php';
+require_once '../../config/session_check.php';
 
 $pdo = DBConnection::connect($host, $user, $dbName, $password);
 $author = new Author($pdo);
@@ -32,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body class="bg-light">
 <div class="container mt-5">
-    <h2 class="mb-4">Books</h2>
+    <h2 class="mb-4">Author</h2>
     <a href="index.php" class="btn btn-primary mb-3">Author List</a>
 <form method="POST">
     <label>First Name: <input type="text" name="first_name" value="<?= htmlspecialchars($data['first_name']) ?>" required></label><br>
