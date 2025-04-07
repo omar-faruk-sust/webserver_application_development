@@ -24,23 +24,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Books CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+
+
+<?php 
+    include("../../template/header.php");
+?>
 <body class="bg-light">
-<div class="container mt-5">
-    <h2 class="mb-4">Author</h2>
-    <a href="index.php" class="btn btn-primary mb-3">Author List</a>
-<form method="POST">
-    <label>First Name: <input type="text" name="first_name" value="<?= htmlspecialchars($data['first_name']) ?>" required></label><br>
-    <label>Middle Name: <input type="text" name="middle_name" value="<?= htmlspecialchars($data['middle_name']?? "") ?>"></label><br>
-    <label>Last Name: <input type="text" name="last_name" value="<?= htmlspecialchars($data['last_name']) ?>" required></label><br>
-    <button class="btn btn-success mb-3" type="submit">Update Author</button>
+<div class="container">
+    <h2 class="mb-4">Edit Author</h2>
+    <a href="index.php" class="btn btn-success mb-3">Author List</a>
+
+    <form method="POST">
+  
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" value="<?= htmlspecialchars($data['first_name']) ?>" name="first_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="middleName" class="form-label">Middle Name</label>
+            <input type="text" class="form-control" id="middleName" value="<?= htmlspecialchars($data['middle_name']?? "") ?>" name="middle_name">
+        </div>
+
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" value="<?= htmlspecialchars($data['last_name']?? "") ?>" name="last_name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="formFile" class="form-label">Photo</label>
+            <input class="form-control" type="file" id="formFile" name="photo" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Update Author</button>
     </form>
 </div>
 </body>
-</html>
+<?php 
+    include("../../template/footer.php");
+?>
+
