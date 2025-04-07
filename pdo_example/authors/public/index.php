@@ -1,24 +1,23 @@
 <?php
-require_once '../../config/db_config.php';
-require_once '../../config/DBConnection.php';
-require_once '../model/Author.php';
-require_once '../../config/session_check.php';
+    require_once '../../config/db_config.php';
+    require_once '../../config/DBConnection.php';
+    require_once '../model/Author.php';
+    require_once '../../config/session_check.php';
 
-$pdo = DBConnection::connect($host, $user, $dbName, $password);
-$author = new Author($pdo);
-$authors = $author->getAll();
+    $pdo = DBConnection::connect($host, $user, $dbName, $password);
+    $author = new Author($pdo);
+    $authors = $author->getAll();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Books CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+
+<?php 
+    include("../../template/header.php");
+?>
+
 <body class="bg-light">
 <div class="container mt-5">
     <h2 class="mb-4">Authors List</h2>
     <a href="create.php" class="btn btn-success mb-3">Add New Author</a>
+    <a href="../../dashboard.php" class="btn btn-info mb-3">Dashboard</a>
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
             <tr>
@@ -26,6 +25,7 @@ $authors = $author->getAll();
                 <th>First</th>
                 <th>Middle</th>
                 <th>Last</th>
+                <th>photo</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -37,6 +37,13 @@ $authors = $author->getAll();
         <td><?= $a['middle_name']??"" ?></td>
         <td><?= htmlspecialchars($a['last_name']) ?></td>
         <td>
+            <?php if($a['photo']): ?>
+                <img src="<?php echo $a['photo']; ?>" width="40", height="40">
+            <?php else: ?>    
+                No Photo
+            <?php endif; ?>
+        </td>
+        <td>
             <a href="edit.php?id=<?= $a['author_id'] ?>">Edit</a> |
             <a href="delete.php?id=<?= $a['author_id'] ?>" onclick="return confirm('Are you sure?')">Delete</a>
         </td>
@@ -45,5 +52,6 @@ $authors = $author->getAll();
     </tbody>
     </table>
 </div>
-</body>
-</html>
+<?php 
+    include("../../template/footer.php");
+?>

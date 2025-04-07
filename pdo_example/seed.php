@@ -34,6 +34,7 @@ $tablesSql = [
         first_name  VARCHAR(100) NOT NULL, 
         middle_name VARCHAR(50) NULL, 
         last_name   VARCHAR(100) NULL,
+        photo VARCHAR(255) NULL,
         PRIMARY KEY(author_id));',
     "book_authors" => 'CREATE TABLE IF NOT EXISTS book_authors (
         book_id   INT NOT NULL, 
@@ -64,9 +65,9 @@ foreach ($tablesSql as $tableName => $sql) {
 
 // Insert data into author table
 $authors = [
-    ['James', null, 'Bond'],
-    ['J.K.', null, 'Rowling'],
-    ['Jane', null, 'Austen'],
+    ['James', null, 'Bond', null],
+    ['J.K.', null, 'Rowling', null],
+    ['Jane', null, 'Austen', null],
 ];
 
 /*$authorIds = [];

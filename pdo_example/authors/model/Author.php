@@ -19,11 +19,12 @@ class Author {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function create($first, $middle, $last) {
-        $stmt = $this->pdo->prepare("INSERT INTO authors (first_name, middle_name, last_name) VALUES (:first, :middle, :last)");
+    public function create($first, $middle, $last, $photo) {
+        $stmt = $this->pdo->prepare("INSERT INTO authors (first_name, middle_name, last_name, photo) VALUES (:first, :middle, :last, :photo)");
         $stmt->bindValue(':first', $first);
         $stmt->bindValue(':middle', $middle);
         $stmt->bindValue(':last', $last);
+        $stmt->bindValue(':photo', $photo);
         return $stmt->execute();
     }
 
