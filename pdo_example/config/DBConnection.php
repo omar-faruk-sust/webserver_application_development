@@ -7,10 +7,7 @@ class DBConnection {
             $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
     
             $pdo = new PDO($dsn, $dbUser, $dbPassword, $options);
-            if($pdo) {
-                echo "We are connected to DB successfully";
-            }
-
+        
             return $pdo;
             
         } catch (PDOException $e) {
