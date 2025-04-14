@@ -17,8 +17,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-<form method="POST">
-    <label>Book Name: <input type="text" name="name" required></label><br>
-    <label>ISBN: <input type="text" name="isbn" required></label><br>
-    <button type="submit">Add Book</button>
-</form>
+
+<?php 
+    include("../../template/header.php");
+?>
+<body class="bg-light">
+<div class="container">
+    <h2 class="mb-4">Add Book</h2>
+    <a href="index.php" class="btn btn-success mb-3">Book List</a>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="bookName" class="form-label">Book Name</label>
+            <input type="text" class="form-control" id="bookName" placeholder="Enter a book name" name="name" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="ISBN" class="form-label">ISBN</label>
+            <input type="text" class="form-control" id="ISBN" placeholder="ISBN" name="isbn">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Add Book</button>
+    </form>
+</div>
+</body>
+<?php 
+    include("../../template/footer.php");
+?>

@@ -43,5 +43,22 @@ class Book {
         $stmt->bindValue(':id', $id, PDO::PARAM_INT);
         return $stmt->execute();
     }
+
+    /**
+     * This function is to search books with name or isbn
+     */
+    public function search($searchText) {
+        $stmt = $this->pdo->prepare(
+            "select * from books where `name` like '%".$searchText."%' OR `isbn` like '%".$searchText."%'"
+        );
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTheLastBook()
+    {
+        return $this->pdo->query("SELECT * FROM books ORDER BY book_id DESC LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    }
 }
 ?>
