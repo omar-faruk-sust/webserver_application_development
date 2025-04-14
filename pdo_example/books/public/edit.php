@@ -26,22 +26,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Books CRUD</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php 
+    include("../../template/header.php");
+?>
 <body class="bg-light">
-<div class="container mt-5">
-    <h2 class="mb-4">Books</h2>
-    <a href="index.php" class="btn btn-primary mb-3">Book List</a>
-<form method="POST">
-    <label>Book Name: <input type="text" name="name" value="<?= htmlspecialchars($bookData['name']) ?>" required></label><br>
-    <label>ISBN: <input type="text" name="isbn" value="<?= htmlspecialchars($bookData['isbn']) ?>" required></label><br>
-    <button class="btn btn-success mb-3" type="submit">Update Book</button>
-</form>
+<div class="container">
+    <h2 class="mb-4">Edit Book</h2>
+    <a href="index.php" class="btn btn-success mb-3">Book List</a>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="bookName" class="form-label">Book Name</label>
+            <input type="text" class="form-control" id="bookName" name="name" required value="<?= htmlspecialchars($bookData['name']) ?>">
+        </div>
+
+        <div class="mb-3">
+            <label for="ISBN" class="form-label">ISBN</label>
+            <input type="text" class="form-control" id="ISBN" name="isbn" value="<?= htmlspecialchars($bookData['isbn']) ?>">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Edit Book</button>
+    </form>
 </div>
 </body>
-</html>
+<?php 
+    include("../../template/footer.php");
+?>
